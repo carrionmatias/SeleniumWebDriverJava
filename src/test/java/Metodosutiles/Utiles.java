@@ -10,7 +10,8 @@ public class Utiles {
 			Reporter.log(mensaje);
 			System.out.println(mensaje);
 		}
-		
+
+
 		public static void ThreadSleep2seg() {
 	        // Esperar un breve momento para que aparezcan las sugerencias de autocompletar
 	        try {

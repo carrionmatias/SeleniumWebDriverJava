@@ -2,10 +2,16 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
 	<parameter name="Navegador" value="CHROME"/>
+
 	<parameter name="Url" value="https://tiendamia.com/ar/"/>
   <test thread-count="5" name="Test-Suite-Chrome">
     <classes>
       <class name="com.selenium.test.testTiendaMiaNavegacion"/>
+
+	
+<!--      <class name="com.selenium.test.testTiendaMiaLogin"/>-->
+<!--      <class name="com.selenium.test.testTiendaMiaBusqueda"/>-->
+
     </classes>
   </test> <!-- TestChrome -->
 </suite> <!-- Suite -->
