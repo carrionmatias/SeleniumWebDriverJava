@@ -37,7 +37,7 @@ public class testTiendaMiaNavegacion {
 	@Test( description = "Validar que las busquedas en Tienda Mia funcionan")
 	public void ValidarBusquedaTiendaMia() throws Exception {
 		tiendaMiaHomePages homepage=PageFactory.initElements(driver,tiendaMiaHomePages.class);
-		Utiles.ThreadSleep2seg();// esperas
+		Utiles.ThreadSleep2seg();
 		Assert.assertTrue(homepage.validarPopup1Exista(),"El popup1 aparece");
 		Utiles.reportes("Se cierra el pop-up");
 		homepage.cerrarPopup1();
@@ -48,17 +48,25 @@ public class testTiendaMiaNavegacion {
 		homepage.Cerrarpopup2();
 		Utiles.ThreadSleep2seg();
 		Utiles.reportes("Verificar que el menu Categoria exista");
-		Assert.assertTrue(homepage.validarMenuCategorias()," Validar que el menu Categoria existe");
+		Assert.assertTrue(homepage.validarMenuCategorias()," Validar que el menu Categoria se vizualice");
 		Utiles.ThreadSleep2seg();
 		homepage.listaMenuCategoria();
 		Utiles.threadSleep5seg();
 		Utiles.reportes("Verificar que el button Ofertas exista");
-		Assert.assertTrue(homepage.validarOfertas()," Validar que Button Ofertas existe");
+		Assert.assertTrue(homepage.validarOfertas()," Validar que Button Ofertas se vizualice");
 		homepage.Ofertas.click();
 		Utiles.ThreadSleep2seg();
 		driver.navigate().back();
+		Utiles.reportes("Verificar que el button Como comprar exista");
+		Assert.assertTrue(homepage.validarCompras()," Validar que Button compras se vizualice");
+		homepage.comoComprar.click();
+		Utiles.threadSleep5seg();
+		Utiles.reportes("El popup se visualiza");
+		Assert.assertTrue(homepage.cerrarPopupComprar(),"Se cierra el pop-up");
+		homepage.closeModalComprar.click();
+		Utiles.threadSleep3seg();
 		Utiles.reportes("Verificar que el boton mi cuenta exista");
-		Assert.assertTrue(homepage.validarBotonMiCuenta()," Buttton cuenta existe");
+		Assert.assertTrue(homepage.validarBotonMiCuenta()," Buttton cuenta se vizualice");
 		Utiles.ThreadSleep2seg();
 		homepage.micuentaButton.click();
 		Utiles.reportes("Entrar Button rojo");
@@ -67,7 +75,7 @@ public class testTiendaMiaNavegacion {
 		Utiles.ThreadSleep2seg();
 		driver.navigate().back();
 		Utiles.reportes("Verificar que la caja de busqueda exista");
-		Assert.assertTrue(homepage.validarCajaDeBusqueda2(),"La caja de busqueda se vizualiza");
+		Assert.assertTrue(homepage.validarCajaDeBusqueda2(),"La caja de busqueda se vizualice");
 		Utiles.ThreadSleep2seg();
 		Utiles.reportes("En la caja de busqueda Lavarropa");
 		homepage.ingresarCajadeBusqueda2("Lavarropa");

@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import org.testng.Reporter;
 
+import Metodosutiles.Utiles;
+
 public class tiendaMiaHomePages {
 	WebDriver driver;
 
@@ -86,13 +88,7 @@ public class tiendaMiaHomePages {
 	private WebElement OrdenarPor;
 	@FindBy(xpath = "//body/div[2]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/select[1]")
 	private Select ListaOrdenarPor;
-/////////////////////////vero///////////
-	
-	@FindBy(xpath = "//a[@class='solo_ar']//span[contains(text(),'Ofertas')]")
-	public WebElement Ofertas;
-	@FindBy(xpath = "//div[@class='menu-categories']")
-	public WebElement menuCategorias ;
-	
+
 	// Selector ordenar por:Promocionados
 	@FindBy(xpath = "//option[contains(text(),'Promocionados')]")
 	private WebElement OrdenarPorPromocionados;
@@ -111,7 +107,7 @@ public class tiendaMiaHomePages {
 	// Selector ordenar por:Mas Vendidos
 	@FindBy(xpath = "//option[contains(text(),'Mas Vendidos')]")
 	private WebElement OrdenarPorMasVendidos;
-
+	
 
 	
 	// *** IDENTIFICAMOS LOS ELEMENTOS POR SU LOCATOR EJEMPLO ID O XPATH
@@ -363,27 +359,61 @@ public class tiendaMiaHomePages {
 		// TODO Auto-generated method stub
 		return null;
 	}
+/////////////////////////CODIGO vero/NAVEGACION/selectores///////////
+	
+@FindBy(xpath = "//a[@class='solo_ar']//span[contains(text(),'Ofertas')]")
+public WebElement Ofertas;
+@FindBy(xpath = "//div[@class='menu-categories']")
+public WebElement menuCategorias ;
+@FindBy(xpath = "(//a[@id='como_comprar_light'])[1]")
+public WebElement comoComprar;
+@FindBy(xpath ="(//button[@class='close modal-como-comprar'])[1]")
+public WebElement closeModalComprar;
 
-	public void ingresarOfertas() {
-		Reporter.log("Sebusca el boton de entrar");
-		Actions actions = new Actions(driver);
-		actions.moveToElement(Ofertas).click();
-	}
-	public boolean validarOfertas() {
-		Reporter.log("Localizar y comprobar que el boton Entar exista");
-		return Ofertas.isDisplayed();
-	}
-	public boolean validarMenuCategorias() {
-		Reporter.log("Localizar y comprobar que el boton Ordenar Por: funcione");
-		return menuCategorias.isDisplayed();
+/////////////fin de navegacion///////////
+	
+////////////vero/metodos////////////
+
+
+public void ingresarOfertas() {
+	Reporter.log("Se busca el button Ofertas");
+	Actions actions = new Actions(driver);
+	actions.moveToElement(Ofertas).click();
+}
+public boolean validarOfertas() {
+	Reporter.log("Localizar y comprobar que el boton Ofertas exista");
+	return Ofertas.isDisplayed();
+}
+	
+public void ingresarComprar() {
+	Reporter.log("Se busca el button comprar");
+	Actions actions = new Actions(driver);
+	actions.moveToElement(comoComprar).click();
+}
+	public boolean validarCompras() {
+		Reporter.log("Localizar que el button Compras exista");
+		return comoComprar.isDisplayed();
 	}
 	public void listaMenuCategoria() {
-		Reporter.log("Sebusca Ordenar Por Menor a Mayor");
+		Reporter.log("Se busca menu Categoria");
 		Actions actions = new Actions(driver);
 		actions.moveToElement(menuCategorias).click().perform();
 	}
+	public boolean validarMenuCategorias() {
+		Reporter.log("Localizar y comprobar que el menu Categoria exista");
+		return menuCategorias.isDisplayed();
+	}
+	public void validarPopupComprar() {
+		Reporter.log("Utilizar Actions para hacer clic en el enlace");
+		Actions actions = new Actions(driver);
+		actions.moveToElement(closeModalComprar).click().perform();
+	}
+	public boolean cerrarPopupComprar() {
+		Reporter.log("Localizar y comprobar que el modal exista");
+		return closeModalComprar.isDisplayed();
+	}
 
-
+///////////////////////////////////////////////////////////////////////////
 
 		
 	
