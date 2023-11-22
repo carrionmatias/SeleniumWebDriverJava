@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-
+import org.testng.Assert;
 import org.testng.Reporter;
 
 import Metodosutiles.Utiles;
@@ -236,13 +236,7 @@ public class tiendaMiaHomePages {
 		email.sendKeys(dato);
 	}
 
-	
-	
-	
-	
-	
 	public boolean validarCorreo (){
-
 		Reporter.log("Se visualiza el elemento elemento email");
 		return email.isDisplayed();
 	}
@@ -370,6 +364,7 @@ public WebElement comoComprar;
 @FindBy(xpath ="(//button[@class='close modal-como-comprar'])[1]")
 public WebElement closeModalComprar;
 
+
 /////////////fin de navegacion///////////
 	
 ////////////vero/metodos////////////
@@ -412,6 +407,24 @@ public void ingresarComprar() {
 		Reporter.log("Localizar y comprobar que el modal exista");
 		return closeModalComprar.isDisplayed();
 	}
+	public void listas() {
+		Reporter.log(" Despliegue de la lista del Menu Categoria");
+		Assert.assertTrue(validarMenuCategorias()," Validar que el menu Categoria se vizualice");
+		List<WebElement> opciones = driver.findElements(By.xpath ("(//ul[@id='categories-dropdown'])[1]")); 
+		/////ciclo for hace una repeticion en todos los elementos
+		for (WebElement opcion:opciones) {
+			System.out.println(opcion.getText());
+			/////////el if es la respuesta de si encuentra tal cosa hace esto 
+			if(opcion.getText().contains("Ropa y Accesorios")) {
+				opcion.click();
+				break;//////para donde se le indica y no sigue haciendo el ciclo
+				
+			}
+		}
+	}
+	
+	
+	
 
 ///////////////////////////////////////////////////////////////////////////
 
