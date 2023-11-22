@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.selenium.driver.DriverFactory;
 import com.selenium.pages.tiendaMiaHomePages;
 
+import AccesoADato.ExcelUtils;
 import Metodosutiles.Utiles;
 
 public class testTiendaMiaBusqueda {
@@ -31,20 +32,22 @@ public class testTiendaMiaBusqueda {
 		DriverFactory.FinalizarBrowser(driver);
 		}
 
-	    @DataProvider(name = "datos")
-	    public Object[][] createData() {
-	        return new Object[][] {
-	            { "LAPTOP", "laptop" },
-	            { "", "" },  // Término de búsqueda vacío
-	            { "producto_inexistente", "" }
-	            };
-	            
-	        }
+	@DataProvider (name = "DatosNuevos")
+	public Object[][] DatosNuevos() throws Exception{
+
+	String excelPath= "src\\Recursos\\Recursos.Data\\TestData.xlsx";
+	String hoja="Sheet1";
+	ExcelUtils.setExcelFile(excelPath,hoja);
+	int iTestCaseRow = ExcelUtils.getRowUsed();
+	Object[][] testObjArray = ExcelUtils.getTableArray(excelPath,hoja,iTestCaseRow,2);
+
+	return (testObjArray);
+	}
 	
 	
 	
-	@Test(dataProvider = "datos", description = "Tipear y buscar exitosamente: un prodcuto existente, tipear sin escribir, y tipear un producto inexistente ")
-	public void BusquedaTiendaMia(String varBuscar, String varResultado) throws Exception {
+	@Test(dataProvider = "DatosNuevos", description = "Tipear y buscar exitosamente prodcutos desde un archivo .xlsx")
+	public void BusquedaTiendaMia(String varbuscar) throws Exception {
 		tiendaMiaHomePages homepage=PageFactory.initElements(driver,tiendaMiaHomePages.class);
 		Utiles.reportes("Se abre navegador");		
 		Utiles.ThreadSleep2seg();
@@ -64,11 +67,13 @@ public class testTiendaMiaBusqueda {
 		Assert.assertTrue(homepage.validarCajaDeBusqueda2(), "La caja de busqueda no se visualiza");
 		Utiles.ThreadSleep2seg();
 		
-		Utiles.reportes("A la caja de busqueda le tipeamos la palabra  "  + varBuscar);
-		homepage.ingresarCajadeBusqueda2(varBuscar);
+		Utiles.reportes("A la caja de busqueda le tipeamos la palabra  "  + varbuscar);
+		homepage.ingresarCajadeBusqueda2(varbuscar);
 		Utiles.ThreadSleep2seg();
 		homepage.clickCajadeBusqueda2();
 		Utiles.threadSleep3seg();
+	
+		
 
 	}
 
@@ -179,7 +184,7 @@ public class testTiendaMiaBusqueda {
 		Utiles.threadSleep3seg();
 
 		
-		Utiles.reportes("Se verifica el elemento Ordenar Por:, se visualice");
+		Utiles.reportes("Se verifica el elemento Ordenar Por: Mayor a Menor");
 		Assert.assertTrue(homepage.validarBotonOrdenarPor(),"El elemento Ordenar Por Mayor a menor no aparece");		
 		Utiles.reportes("Se Hace despliege las opciones de Ordenar por: ");
 		homepage.BotonOrdenarPor();
@@ -408,7 +413,43 @@ public class testTiendaMiaBusqueda {
 			
 		}   
 	    
-	      
+		@Test(description = "Comparacion de los precios de dos productos con Filtros por categoria Calzado-Hombre-Deportivo")
+		public void comparacionDePrecio() throws Exception {
+			tiendaMiaHomePages homepage=PageFactory.initElements(driver,tiendaMiaHomePages.class);
+			
+			Utiles.ThreadSleep2seg();
+			
+			Assert.assertTrue(homepage.validarPopup1Exista(),"El pup-up no aparece");
+			Utiles.reportes("Se cierra pup-up");
+			homepage.cerrarPopup1();
+			Utiles.threadSleep5seg();
+			
+			Utiles.reportes("Se verifica el elemento Pup-up exista");
+			Assert.assertTrue(homepage.validarPopup2Exista(),"El Pup-up no aparece");
+			Utiles.reportes("Se cierra pup-up");
+			homepage.Cerrarpopup2();
+			
+			Utiles.reportes("Se verifica el boton Todas las categorias se visualice");
+			Assert.assertTrue(homepage.validarBotonCategorias(),"El boton Todas las categorias no aparece");
+			homepage.clickBotonCategorias();
+			Utiles.reportes("Se Hace despliege las opciones de todas las categorias ");
+			Utiles.ThreadSleep2seg();
+			
+			homepage.seleccionarListaCalzado();
+			Utiles.ThreadSleep2seg();
+			Utiles.reportes("Se Hace despliege las opciones de la categoria Calzado ");
+
+			
+			homepage.seleccionarListaDeportivo();
+			Utiles.ThreadSleep2seg();
+			Utiles.reportes("Se Hace despliege las opciones de la categoria Deportivo ");
+			Utiles.threadSleep5seg();
+			
+			Utiles.reportes("Se Compara el precio del primer producto seleccionado con el segundo producto seleccionado ");
+			homepage.comparacionNumeros();
+			
+		}   
+      
 	
 
 }
