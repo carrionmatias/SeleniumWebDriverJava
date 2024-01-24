@@ -10,7 +10,6 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.selenium.driver.DriverFactory;
@@ -41,8 +40,7 @@ public class testTiendaMiaLogin {
 		Utiles.reportes("Se cierra el navegador");
 		DriverFactory.FinalizarBrowser(driver);
 	}
-	
-	
+
 	
 	@Test(description = "Validar que las busquedas en Wikipedia funcionan")
 	public void ValidarBusquedaWikipedia() throws Exception {

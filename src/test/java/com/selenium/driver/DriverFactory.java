@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import Metodosutiles.Utiles;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 
@@ -21,15 +22,18 @@ import org.testng.ITestContext;
 		
 		String pagina= context.getCurrentXmlTest().getParameter("Url");
 		
-		/*String browserName =Browser;
-	String pagina=url;*/
-	
+		
 		switch (browsers.valueOf(browserName)) {
 		case CHROME: // Using WebDriver
+			
 		{
+			//////cierra notificaciones del navegador VERO
+			ChromeOptions notificaciones = new ChromeOptions();
+			notificaciones.addArguments("--disable-notifications");
+			notificaciones.addArguments("--disable-extensions");
 			System.setProperty("webdriver.chrome.driver", "src\\Recursos\\drivers\\chromedriver.exe");
 			Utiles.reportes("Abro browser");
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(notificaciones);///llama al cierre de notificaciones /VERO
 			break;
 		}
 		case FIREFOX:// Using WebDriver

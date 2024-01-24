@@ -6,11 +6,17 @@
 	<parameter name="Url" value="https://tiendamia.com/ar/"/>
   <test thread-count="5" name="Test-Suite-Chrome">
     <classes>
-      <class name="com.selenium.test.testTiendaMiaNavegacion"/>
+<!--      <class name="com.selenium.testTiendaMiaBusqueda"/>-->
+      <class name="com.selenium.test.testTiendaMiaBusqueda"/>
+      
+<!--      <class name="com.selenium.testTiendaMiaFiltros"/>-->
+      <class name="com.selenium.test.TiendaMiaFiltros"/>
+      
+<!--      <class name="com.selenium.testTiendaMiaLogin"/>-->
+      <class name="com.selenium.test.TiendaMiaLogin"/>
 
-	
-<!--      <class name="com.selenium.test.testTiendaMiaLogin"/>-->
-<!--      <class name="com.selenium.test.testTiendaMiaBusqueda"/>-->
+<!--      <class name="com.selenium.testTiendaMiaNavegacion.java"/>-->
+      <class name="com.selenium.test.TiendaMiaNavegacion"/>
 
     </classes>
   </test> <!-- TestChrome -->

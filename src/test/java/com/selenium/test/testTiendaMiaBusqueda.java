@@ -35,7 +35,7 @@ public class testTiendaMiaBusqueda {
 	@DataProvider (name = "DatosNuevos")
 	public Object[][] DatosNuevos() throws Exception{
 
-	String excelPath= "src\\Recursos\\Recursos.Data\\TestData.xlsx";
+	String excelPath= "C:\\TestData.xlsx";
 	String hoja="Sheet1";
 	ExcelUtils.setExcelFile(excelPath,hoja);
 	int iTestCaseRow = ExcelUtils.getRowUsed();
@@ -44,14 +44,13 @@ public class testTiendaMiaBusqueda {
 	return (testObjArray);
 	}
 	
-	
-	
 	@Test(dataProvider = "DatosNuevos", description = "Tipear y buscar exitosamente prodcutos desde un archivo .xlsx")
 	public void BusquedaTiendaMia(String varbuscar) throws Exception {
+
+	
 		tiendaMiaHomePages homepage=PageFactory.initElements(driver,tiendaMiaHomePages.class);
 		Utiles.reportes("Se abre navegador");		
 		Utiles.ThreadSleep2seg();
-		
 		Assert.assertTrue(homepage.validarPopup1Exista(),"El pup-up no aparece");
 		Utiles.reportes("Se cierra pup-up");
 		homepage.cerrarPopup1();
@@ -223,7 +222,7 @@ public class testTiendaMiaBusqueda {
 		Utiles.threadSleep3seg();
 
 		
-		Utiles.reportes("Se verifica el elemento Ordenar Por:, se visualice");
+		Utiles.reportes("Se verifica el elemento Ordenar Por Mejor puntuados");
 		Assert.assertTrue(homepage.validarBotonOrdenarPor(),"El elemento Ordenar Por Mejor Puntuados no aparece");		
 		Utiles.reportes("Se Hace despliege las opciones de Ordenar por: ");
 		homepage.BotonOrdenarPor();
@@ -235,7 +234,7 @@ public class testTiendaMiaBusqueda {
 	}
 
 	@Test(description = "Búsqueda con Filtro Ordenado por:Recien Arribados")
-	public void BuscarPorFiltroReciénArribados() throws Exception {
+	public void BuscarPorFiltroRecienArribados() throws Exception {
 		tiendaMiaHomePages homepage=PageFactory.initElements(driver,tiendaMiaHomePages.class);
 		
 		Utiles.ThreadSleep2seg();
@@ -247,10 +246,6 @@ public class testTiendaMiaBusqueda {
 		
 		Utiles.reportes("Se verifica el elemento Pup-up exista");
 		Assert.assertTrue(homepage.validarPopup2Exista(),"El Pup-up no aparece");
-		Utiles.reportes("Se cierra pup-up");
-		homepage.Cerrarpopup2();
-		Utiles.ThreadSleep2seg();
-		
 		Utiles.reportes("Se verifica que la caja de busqueda exista");
 		Assert.assertTrue(homepage.validarCajaDeBusqueda2(), "La caja de busqueda no se visualiza");
 		Utiles.ThreadSleep2seg();
